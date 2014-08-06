@@ -1,12 +1,12 @@
 "use strict";
 
-angular.module('mhicauber.tch-row-selectable', [])
+angular.module('mhicauber.tch-selectable-row', [])
 
-    .directive("tchRowSelectable", function () {
+    .directive("tchSelectableRow", function () {
         return {
             restrict: 'A',
             link: function (scope, elem) {
-                scope.$watch("$parent.$parent.tchRowSelectableChoice",
+                scope.$watch("$parent.$parent.tchSelectableRowChoice",
                     function (value) {
                         elem.toggleClass('row-selected',
                                 value === scope.$index);
@@ -14,7 +14,7 @@ angular.module('mhicauber.tch-row-selectable', [])
 
                 elem.bind('click', function () {
                     scope.$apply(function () {
-                        scope.$parent.$parent.tchRowSelectableChoice = scope.$index;
+                        scope.$parent.$parent.tchSelectableRowChoice = scope.$index;
                     });
                 });
             }
