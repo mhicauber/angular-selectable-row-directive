@@ -1,4 +1,4 @@
-angular-selectable-row-directive
+angular-selectable-row-directive [![Build Status](https://travis-ci.org/mhicauber/angular-selectable-row-directive.svg?branch=master)](https://travis-ci.org/mhicauber/angular-selectable-row-directive)
 =============================================
 
 This project was intended to help me testing functionalities, Travis CI integration and sharing an angular component with Bower.
