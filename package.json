@@ -1,0 +1,41 @@
+{
+    "name": "angular-selectable-row-directive",
+    "version": "1.0.1",
+    "description": "Angular directive that will respond to click events on rows in a table by adding a css class. Designed to be used with ng-repeat directive.",
+    "main": "directive.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mhicauber/angular-selectable-row-directive.git"
+    },
+    "keywords": [
+        "angular",
+        "directive",
+        "selectable",
+        "ng-repeat",
+        "row",
+        "select",
+        "click",
+        "event"
+    ],
+    "author": "mathieuhicauber@gmail.com",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/mhicauber/angular-selectable-row-directive/issues"
+    },
+    "homepage": "https://github.com/mhicauber/angular-selectable-row-directive",
+    "devDependencies": {
+        "karma": "~0.10"
+    },
+    "scripts": {
+        "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
+    },
+    "plugins": [
+        "karma-jasmine",
+        "karma-requirejs",
+        "karma-coverage",
+        "karma-junit-reporter",
+        "karma-phantomjs-launcher"
+    ]
+
+
+}
