@@ -3,11 +3,11 @@ describe('Unit testing row-selectable directive', function () {
     var elm, scope;
 
     // Load the app module, which contains the directive
-    beforeEach(module('app'));
+    beforeEach(module('mhicauber.tch-selectable-row'));
 
     beforeEach(inject(function ($rootScope, $compile) {
 
-        elm = angular.element('<div ng-switch="true"><table ng-switch="true" class="ng-scope" id="myTable" row-selectable>\n    <tr tch-row-selectable ng-repeat="object in businessObjectsList">\n        <td>{{object.id}}</tbject.d>\n        <td>{{object.value}}</td>\n    </tr>\n</table></div>');
+        elm = angular.element('<tr tch-selectable-row ng-repeat="object in businessObjectsList">\n        <td>{{object.id}}</tbject.d>\n        <td>{{object.value}}</td>\n    </tr>');
 
         scope = $rootScope;
 
@@ -46,6 +46,7 @@ describe('Unit testing row-selectable directive', function () {
 
         // THEN
         for (var i = 0; i < rows.length; i++) {
+            debugger;
             var row = rows.eq(i);
             if (i === clickedRowNumber) {
                 expect(row.hasClass('row-selected')).toBe(true);
