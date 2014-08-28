@@ -1,10 +1,10 @@
 {
   "name": "angular-selectable-row-directive",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "authors": [
     "Mathieu Hicauber <mathieuhicauber@gmail.com>"
   ],
-  "description": "Angular directive that will respond to click events on rows in a table by adding a css class. Designed to be used with ng-repeat directive.",
+  "description": "Angular directive that will respond to click events on items by adding a css class. An internal state keeps track of current selected item, so it can be used in conjunction with ng-repeat directive. Allow a callback function to be called when clicked.",
   "main": "directive.js",
   "keywords": [
     "angular",

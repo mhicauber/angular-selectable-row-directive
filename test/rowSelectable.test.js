@@ -7,7 +7,7 @@ describe('Unit testing row-selectable directive', function () {
 
     beforeEach(inject(function ($rootScope, $compile) {
 
-        elm = angular.element('<tr tch-selectable-row ng-repeat="object in businessObjectsList">\n        <td>{{object.id}}</tbject.d>\n        <td>{{object.value}}</td>\n    </tr>');
+        elm = angular.element('<table>\n    <tr ng-repeat="object in businessObjectsList" tch-selectable-item tch-selectable-index="$index" tch-selectable-callback="myCallback(object.id)" >\n        <td>{{object.id}}</td>\n        <td>{{object.value}}</td>\n    </tr>\n</table>\n\n');
 
         scope = $rootScope;
 
@@ -46,7 +46,6 @@ describe('Unit testing row-selectable directive', function () {
 
         // THEN
         for (var i = 0; i < rows.length; i++) {
-            debugger;
             var row = rows.eq(i);
             if (i === clickedRowNumber) {
                 expect(row.hasClass('row-selected')).toBe(true);
@@ -55,6 +54,24 @@ describe('Unit testing row-selectable directive', function () {
             }
         }
     });
+
+    it('should call the scope callback function whenever there\'s one ', function() {
+        // GIVEN
+        var clickedRowNumber = 1;
+        var rows = angular.element(elm).find('tbody tr');
+        var rowToClick = rows.eq(clickedRowNumber);
+        var watchedValue = "";
+        scope.myCallback = function(value) {
+            watchedValue = value;
+        };
+
+        // WHEN
+        rowToClick.click();
+
+        // THEN
+        expect(watchedValue).toBe(scope.businessObjectsList[clickedRowNumber].id);
+
+    })
 
 
 });
