@@ -3,51 +3,56 @@
 /**
  * This simple directive allow you to track a clicked element.
  * Designed to be used in conjunction with ng-repeat.
- * It will add a css class on clicked row in table, and allow a scope callback function to be called.
+ * It will add a css class on clicked row in table
+ * Can be used multiple times on a page : add tch-selectable-index attribute and give its value a unique id on the page.
  *
  * usage :
  *
- *    <tr ng-repeat="object in businessObjectsList" tch-selectable-item tch-selectable-index="$index" tch-selectable-callback="myCallback(object.id)" >
+ *    <tr ng-repeat="object in businessObjectsList" tch-selectable-item [tch-selectable-index="id1"] >
+ *
+ *    <tr ng-repeat="object in businessObjectsList" tch-selectable-item tch-selectable-index="id2" >
  */
 angular.module('mhicauber.tch-selectable-row', [])
 
     .factory('tchDataService', function () {
 
-        var tracker;
+        var tracker = {};
 
         return {
-            setTrackedId: function (id) {
-                tracker = id;
+            setTrackedId: function (id, index) {
+                tracker[id] = index;
             },
 
-            getTrackedId: function () {
-                return tracker;
+            getTrackedId: function (id) {
+                return tracker[id]
             }
         }
     })
 
 
     .directive("tchSelectableItem", function (tchDataService) {
+
         return {
             restrict: 'A',
-            scope: {
-                callbackFunction: '&tchSelectableCallback',
-                index: '=tchSelectableIndex'
-            },
-            link: function (scope, elem, attrs, selectableCtrl) {
-                scope.$watch(tchDataService.getTrackedId,
+            link: function (scope, elem, attrs) {
+
+                var elementId = "unique";
+                if (attrs.tchSelectableId) {
+                    elementId = attrs.tchSelectableId;
+                }
+
+                scope.$watch(function () {
+                        return tchDataService.getTrackedId(elementId)
+                    },
                     function (value) {
                         elem.toggleClass(
                             'row-selected',
-                                value === scope.index);
+                                value === scope.$index);
                     });
 
                 elem.bind('click', function () {
                     scope.$apply(function () {
-                        tchDataService.setTrackedId(scope.index);
-                        if (scope.callbackFunction) {
-                            scope.callbackFunction();
-                        }
+                        tchDataService.setTrackedId(elementId, scope.$index);
                     });
                 });
             }

@@ -7,7 +7,7 @@ describe('Unit testing row-selectable directive', function () {
 
     beforeEach(inject(function ($rootScope, $compile) {
 
-        elm = angular.element('<table>\n    <tr ng-repeat="object in businessObjectsList" tch-selectable-item tch-selectable-index="$index" tch-selectable-callback="myCallback(object.id)" >\n        <td>{{object.id}}</td>\n        <td>{{object.value}}</td>\n    </tr>\n</table>\n\n');
+        elm = angular.element('<table id="table1">\n    <tr ng-repeat="object in businessObjectsList" tch-selectable-item  tch-selectable-id="table1">\n        <td>{{object.id}}</td>\n        <td>{{object.value}}</td>\n    </tr>\n</table>\n<table id="table2">\n    <tr ng-repeat="object in businessObjectsList" tch-selectable-item tch-selectable-id="table2">\n        <td>{{object.id}}</td>\n        <td>{{object.value}}</td>\n    </tr>\n</table> ');
 
         scope = $rootScope;
 
@@ -31,6 +31,7 @@ describe('Unit testing row-selectable directive', function () {
         $compile(elm)(scope);
         scope.$digest();
 
+
     }));
 
 
@@ -38,7 +39,7 @@ describe('Unit testing row-selectable directive', function () {
 
         // GIVEN
         var clickedRowNumber = 1;
-        var rows = angular.element(elm).find('tbody tr');
+        var rows = angular.element(elm).filter('#table1').find('tr');
         var rowToClick = rows.eq(clickedRowNumber);
 
         // WHEN
@@ -55,24 +56,43 @@ describe('Unit testing row-selectable directive', function () {
         }
     });
 
-    it('should call the scope callback function whenever there\'s one ', function() {
+
+
+
+    it('should handle several directives on same page', function () {
         // GIVEN
-        var clickedRowNumber = 1;
-        var rows = angular.element(elm).find('tbody tr');
-        var rowToClick = rows.eq(clickedRowNumber);
-        var watchedValue = "";
-        scope.myCallback = function(value) {
-            watchedValue = value;
-        };
+        var clickedRowNumber1 = 0;
+        var clickedRowNumber2 = 2;
+
+        var rows1 = angular.element(elm).filter('#table1').find('tr');
+        var rowToClick1 = rows1.eq(clickedRowNumber1);
+
+        var rows2 = angular.element(elm).filter('#table2').find('tr');
+        var rowToClick2 = rows2.eq(clickedRowNumber2);
 
         // WHEN
-        rowToClick.click();
+        rowToClick1.click();
+        rowToClick2.click();
 
         // THEN
-        expect(watchedValue).toBe(scope.businessObjectsList[clickedRowNumber].id);
+        for (var i = 0; i < rows1.length; i++) {
+            var row = rows1.eq(i);
+            if (i === clickedRowNumber1) {
+                expect(row.hasClass('row-selected')).toBe(true);
+            } else {
+                expect(row.hasClass('row-selected')).toBe(false);
+            }
+        }
+        for (var i = 0; i < rows2.length; i++) {
+            var row = rows2.eq(i);
+            if (i === clickedRowNumber2) {
+                expect(row.hasClass('row-selected')).toBe(true);
+            } else {
+                expect(row.hasClass('row-selected')).toBe(false);
+            }
+        }
 
     })
-
 
 });
 
