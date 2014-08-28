@@ -14,11 +14,11 @@ bower install mhicauber/angular-selectable-row-directive --save
 Then include the `directive.js` file Bower just downloaded into your project.
 
 The directive is intended to be used in conjunction with ng-repeat directive.
-You must pass in tch-selectable-item, and optionnaly tch-selectable-index attibute with a unique value if used multiple times on the page.
+You must pass in tch-selectable-item, and optionnaly tch-selectable-id attibute with a unique value if used multiple times on the page.
 
 ```html
-<tr ng-repeat="object in businessObjectsList" tch-selectable-item [tch-selectable-index="id1"] >
-<tr ng-repeat="object in businessObjectsList" tch-selectable-item tch-selectable-index="id2" >
+<tr ng-repeat="object in businessObjectsList" tch-selectable-item [tch-selectable-id="id1"] >
+<tr ng-repeat="object in businessObjectsList" tch-selectable-item tch-selectable-id="id2" >
 ...
 </tr>
 ```

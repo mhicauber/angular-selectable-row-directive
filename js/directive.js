@@ -4,13 +4,13 @@
  * This simple directive allow you to track a clicked element.
  * Designed to be used in conjunction with ng-repeat.
  * It will add a css class on clicked row in table
- * Can be used multiple times on a page : add tch-selectable-index attribute and give its value a unique id on the page.
+ * Can be used multiple times on a page : add tch-selectable-id attribute and give its value a unique id on the page.
  *
  * usage :
  *
- *    <tr ng-repeat="object in businessObjectsList" tch-selectable-item [tch-selectable-index="id1"] >
+ *    <tr ng-repeat="object in businessObjectsList" tch-selectable-item [tch-selectable-id="id1"] >
  *
- *    <tr ng-repeat="object in businessObjectsList" tch-selectable-item tch-selectable-index="id2" >
+ *    <tr ng-repeat="object in businessObjectsList" tch-selectable-item tch-selectable-id="id2" >
  */
 angular.module('mhicauber.tch-selectable-row', [])
 
