@@ -57,4 +57,4 @@ angular.module('mhicauber.tch-selectable-row', [])
                 });
             }
         }
-    })
+    });
